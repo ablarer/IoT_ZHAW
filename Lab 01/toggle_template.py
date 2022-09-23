@@ -72,6 +72,7 @@ SLEEP_TIME_STEP_IN_MILLIS = int(200)
 #define FULL_ANGLE 300 //full value of the rotary angle is 300 degrees
 GROVE_VCC = 5
 FULL_ANGLE = 300
+current_state = int(0)
 
 rotary_angle_sensor_raw = int(0)
 
@@ -130,14 +131,16 @@ def read_rotary_angle_sensor():
 def toggle_leds():
     # toggle the state of your leds here
     # and write the state to the digital pins
-    state = grovepi.input(LED0_PIN)
-    if state:
+    global current_state
+
+    current_state = grovepi.input(LED0_PIN)
+    if current_state:
         grovepi.digitalWrite(LED0_PIN, int(0))
     else:
         grovepi.digitalWrite(LED0_PIN, int(1))
 
-    state = grovepi.input(LED1_PIN)
-    if state:
+    current_state = grovepi.input(LED1_PIN)
+    if current_state:
         grovepi.digitalWrite(LED1_PIN, int(0))
     else:
         grovepi.digitalWrite(LED1_PIN, int(1))
